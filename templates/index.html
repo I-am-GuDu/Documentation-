@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Optional vendor CSS (can remove if not using) -->
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <!-- IMPORTANT: method, enctype, csrf -->
+  <form method="post" enctype="multipart/form-data" action="">
+    {% csrf_token %}
+    <fieldset>
+      <legend>DATA VERIFICATION</legend>
+
+      <div class="form-grid">
+        <div class="field">
+          <span class="label">Name</span>
+          <input type="text" name="name" placeholder="Enter your name" required autofocus>
+        </div>
+
+        <div class="field">
+          <span class="label">Address</span>
+          <textarea name="address" placeholder="Enter your address" required></textarea>
+        </div>
+
+        <div class="field">
+          <span class="label">Gender</span>
+          <div class="inline">
+            <label><input type="radio" name="gender" value="m"> Male</label>
+            <label><input type="radio" name="gender" value="f"> Female</label>
+            <label><input type="radio" name="gender" value="o"> Other</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label">Date of birth</span>
+          <!-- name fixed to 'dob' -->
+          <input type="date" name="dob">
+        </div>
+
+        <div class="field">
+          <span class="label">Phone</span>
+          <input type="tel" name="phone" placeholder="Enter your phone no" required>
+        </div>
+
+        <div class="field">
+          <span class="label">Age</span>
+          <input type="number" name="age" min="1" max="30">
+        </div>
+
+        <div class="field">
+          <span class="label">Email</span>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="field">
+          <span class="label">Password</span>
+          <input type="password" name="password" required>
+        </div>
+
+        <div class="field">
+          <span class="label">Image</span>
+          <input type="file" name="image">
+        </div>
+
+        <div class="field">
+          <span class="label">Aadhaar</span>
+          <!-- name fixed to 'aadhaar' -->
+          <input type="file" name="aadhaar">
+        </div>
+
+        <div class="field">
+          <span class="label">10th</span>
+          <!-- name fixed to 'tenth' (cannot start with a digit) -->
+          <input type="file" name="tenth">
+        </div>
+
+        <div class="field">
+          <span class="label">Country</span>
+          <!-- add name="country" so it posts -->
+          <select name="country">
+            <optgroup label="Asia">
+              <option value="" selected>Enter your country name</option>
+              <option value="india">India</option>
+              <option value="china">China</option>
+              <option value="london">London</option>
+              <option value="uk">UK</option>
+            </optgroup>
+            <option value="rusia">Russia</option>
+            <option value="vutan">Bhutan</option>
+            <option value="dubai">Dubai</option>
+            <option value="sri lanka">Sri Lanka</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="label">Hobbies</span>
+          <div class="inline">
+            <!-- keep same name for getlist -->
+            <label><input type="checkbox" name="Hobbies" value="Dancing"> Dancing</label>
+            <label><input type="checkbox" name="Hobbies" value="Singing"> Singing</label>
+            <label><input type="checkbox" name="Hobbies" value="Painting"> Painting</label>
+            <label><input type="checkbox" name="Hobbies" value="Gardening"> Gardening</label>
+            <label><input type="checkbox" name="Hobbies" value="Driving"> Driving</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label">Favorite color</span>
+          <input type="color" name="color">
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="actions">
+        <input class="btn" type="submit" value="Send">
+        <input class="btn secondary" type="reset" value="Reset">
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

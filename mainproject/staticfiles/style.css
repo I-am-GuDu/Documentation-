@@ -1,0 +1,253 @@
+/* 3D Form Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root{
+  --bg1:#0f1226;
+  --bg2:#1b2141;
+  --accent:#7c5cff;
+  --accent-2:#00e0ff;
+  --text:#e9ecf1;
+  --muted:#aab1c3;
+  --error:#ff6b6b;
+  --ok:#2dd4bf;
+  --glass:rgba(255,255,255,0.06);
+  --glass-2:rgba(255,255,255,0.12);
+  --shadow-lg: 0 25px 60px rgba(0,0,0,0.45), 0 10px 25px rgba(0,0,0,0.35);
+  --shadow-md: 0 12px 28px rgba(0,0,0,0.35), 0 6px 14px rgba(0,0,0,0.25);
+  --radius:16px;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 10% 10%, #1e234d 0%, transparent 60%),
+    radial-gradient(900px 900px at 90% 20%, #16213e 0%, transparent 60%),
+    linear-gradient(160deg, var(--bg1), #0b0f20 60%, #05070f);
+  display:grid;
+  place-items:center;
+  padding:48px 16px;
+  perspective:1000px;
+}
+
+/* Card container with subtle 3D tilt on hover */
+form{
+  width:min(720px,92vw);
+  background:linear-gradient(180deg, var(--glass-2), var(--glass));
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:var(--radius);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.06);
+  transform-style:preserve-3d;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
+}
+
+form:hover{
+  transform: rotateX(2deg) rotateY(-2.5deg) translateZ(8px);
+  box-shadow: 0 35px 90px rgba(0,0,0,0.55), 0 15px 35px rgba(0,0,0,0.45);
+}
+
+fieldset{
+  border:none;
+  padding:28px clamp(20px,4vw,36px) 34px;
+}
+
+/* Floating neon legend */
+legend{
+  font-weight:600;
+  font-size:clamp(1.1rem, 1.2rem + .5vw, 1.6rem);
+  letter-spacing:.5px;
+  color:var(--text);
+  padding:12px 18px;
+  margin-left:10px;
+  border-radius:999px;
+  background:
+    linear-gradient(90deg, rgba(124,92,255,.22), rgba(0,224,255,.18));
+  border:1px solid rgba(124,92,255,.35);
+  box-shadow:
+    0 6px 16px rgba(124,92,255,.25),
+    inset 0 1px 3px rgba(255,255,255,.25);
+  transform: translateZ(20px);
+}
+
+/* Form grid */
+.form-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:18px clamp(14px, 2.4vw, 28px);
+  margin-top:10px;
+}
+
+@media (max-width:720px){
+  .form-grid{ grid-template-columns: 1fr; }
+}
+
+/* Group each label+control */
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* Labels */
+.field > .label{
+  font-size:.92rem;
+  color:var(--muted);
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="color"],
+select,
+textarea{
+  appearance:none;
+  width:100%;
+  padding:12px 14px;
+  font-size:0.98rem;
+  color:var(--text);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;
+  outline:none;
+  transition: transform .2s ease, border-color .2s, box-shadow .2s, background .2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 18px rgba(0,0,0,.25);
+}
+
+textarea{ min-height:110px; resize:vertical }
+
+/* Focus 3D lift + glow */
+input:focus, textarea:focus, select:focus{
+  transform: translateZ(6px) translateY(-2px);
+  border-color: color-mix(in oklab, var(--accent), white 25%);
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--accent), transparent 70%),
+    0 18px 28px rgba(0,0,0,.35);
+  background:linear-gradient(180deg, rgba(124,92,255,.18), rgba(0,0,0,.08));
+}
+
+/* Radio & checkbox groups */
+.inline{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px 18px;
+  align-items:center;
+  padding:12px;
+  border:1px dashed rgba(255,255,255,.16);
+  border-radius:12px;
+  background: rgba(255,255,255,.03);
+}
+
+.inline label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+}
+
+/* Pretty switches for radio/checkbox */
+input[type="radio"], input[type="checkbox"]{
+  appearance:none;
+  width:18px; height:18px;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,.35);
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 2px 8px rgba(0,0,0,.35);
+  display:grid; place-items:center;
+  transition: all .2s ease;
+}
+
+input[type="radio"]{ border-radius:999px; }
+
+input[type="checkbox"]::after, input[type="radio"]::after{
+  content:"";
+  width:10px; height:10px;
+  border-radius:inherit;
+  transform:scale(0);
+  background:linear-gradient(180deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 10px rgba(124,92,255,.6);
+  transition: transform .2s ease;
+}
+
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after{ transform:scale(1); }
+
+/* Buttons with 3D press effect */
+.actions{
+  display:flex;
+  gap:14px;
+  margin-top:6px;
+}
+
+.btn{
+  flex:1;
+  border:none;
+  color:#0b0f20;
+  font-weight:700;
+  letter-spacing:.3px;
+  padding:14px 16px;
+  border-radius:14px;
+  cursor:pointer;
+  background: linear-gradient(180deg, #8e79ff, #7c5cff 60%, #5b3dff);
+  color:white;
+  box-shadow:
+    0 14px 28px rgba(124,92,255,.45),
+    inset 0 1px 0 rgba(255,255,255,.35);
+  transform: translateZ(12px);
+  transition: transform .15s ease, box-shadow .15s ease, filter .2s;
+}
+
+.btn:hover{
+  filter:brightness(1.06);
+  transform: translateY(-2px) translateZ(16px);
+}
+
+.btn:active{
+  transform: translateY(2px) translateZ(4px);
+  box-shadow:
+    0 8px 18px rgba(124,92,255,.35),
+    inset 0 2px 6px rgba(0,0,0,.35);
+}
+
+.btn.secondary{
+  background: linear-gradient(180deg, #59e1d6, #2dd4bf 60%, #1fb3a0);
+  box-shadow:
+    0 14px 28px rgba(45,212,191,.35),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* Small helper text */
+.help{
+  font-size:.82rem;
+  color:var(--muted);
+}
+
+/* Subtle divider line */
+.hr{
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  margin:6px 0 10px;
+}
+
+/* Tiny tilt for the whole head area to sell depth */
+header.form-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:8px;
+  transform: translateZ(18px);
+}
